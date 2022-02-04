@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "385763010540",
+    "project_id": "chat-da68f",
+    "storage_bucket": "chat-da68f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385763010540:android:adbede8f1e0badcc7542c9",
+        "android_client_info": {
+          "package_name": "com.chanhocode.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385763010540-do0un26rna0c6oq0qk6m8e3mmmb7dmh6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.chanhocode.chat",
+            "certificate_hash": "10fe135426ebfd0004452369998c9473ab0483da"
+          }
+        },
+        {
+          "client_id": "385763010540-jdlsjg7a6ahnggm5e0fjdjivqo9dt4fg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTto-tk86Yp78CBqI0EGkrE0Hll0TOR90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385763010540-jdlsjg7a6ahnggm5e0fjdjivqo9dt4fg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

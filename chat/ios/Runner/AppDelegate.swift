@@ -1,4 +1,5 @@
 import UIKit
+//import Firebase // 추가한부분
 import Flutter
 
 @UIApplicationMain
@@ -7,6 +8,7 @@ import Flutter
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+    //FirebaseApp.configure() // 추가한부분
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

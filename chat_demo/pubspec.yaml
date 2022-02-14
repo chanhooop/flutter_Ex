@@ -1,4 +1,4 @@
-name: chat
+name: chat_demo
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -34,12 +34,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  firebase_auth: ^3.3.6
-  google_sign_in: ^5.2.3
-  cloud_firestore: ^3.1.7
-  firebase_storage: ^10.2.6
-  firebase_core: ^1.12.0
-  shared_preferences: ^2.0.12
+  cloud_firestore: ^3.1.8
+  firebase_core: ^1.10.6
+  provider: ^6.0.1
+  uuid: ^3.0.5
 
 dev_dependencies:
   flutter_test:

@@ -2,10 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
+void main() {
   // Firebase initialize 해주기 비동기로
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp;
+  // await Firebase.initializeApp;
   runApp(const MyApp());
 }
 

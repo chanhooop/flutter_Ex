@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_fcm_ex/controller/push_notifications_system.dart';
 import 'package:flutter_fcm_ex/firebase_options.dart';
 import 'package:flutter_fcm_ex/model/notification_badge.dart';
 import 'package:flutter_fcm_ex/model/pushnotification_model.dart';
@@ -20,15 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  //await initializeDefault();
   runApp(const MyApp());
-}
-
-Future initializeDefault() async {
-  FirebaseApp app = await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  debugPrint('Initialized default app $app');
 }
 
 class MyApp extends StatelessWidget {
@@ -61,99 +54,17 @@ class _HomePageState extends State<HomePage> {
   late int _totalNotificationCounter;
 
   PushNotification? _notificationInfo;
-  // register notification
-  void registerNotification() async {
-    print('registerNotification 실행');
-    // await Firebase.initializeApp();
-    // instance for firebase messaging
-    _messaging = FirebaseMessaging.instance;
-    // three type of state in notification
-    // not determined (null), granted(true) and decline (false)
-    NotificationSettings settings = await _messaging.requestPermission(
-      alert: true,
-      announcement: false,
-      badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-      sound: true,
-    );
-
-    // Ios 처리 부분
-    // await FirebaseMessaging.instance
-    //     .setForegroundNotificationPresentationOptions(
-    //   alert: true, // Required to display a heads up notification
-    //   badge: true,
-    //   sound: true,
-    // );
-    print('이 부분 뭐지');
-    print(settings.authorizationStatus == AuthorizationStatus.authorized);
-    print(settings.authorizationStatus);
-
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted the permission');
-      // main message
-      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        DateTime now = DateTime.now();
-        print('registerNotification 찍힌 시간 : $now');
-        PushNotification notification = PushNotification(
-          title: message.notification!.title,
-          body: message.notification!.body,
-          dataTitle: message.data['title'],
-          dataBody: message.data['body'],
-        );
-        setState(() {
-          _totalNotificationCounter++;
-          _notificationInfo = notification;
-        });
-
-        if (notification != null) {
-          showSimpleNotification(
-            Text(_notificationInfo!.title!),
-            leading: NotificationBadege(
-                totalNotification: _totalNotificationCounter),
-            subtitle: Text(_notificationInfo!.body!),
-            background: Colors.cyan.shade700,
-            duration: Duration(seconds: 2),
-          );
-        }
-      });
-    } else {
-      print("permission declined by user");
-    }
-  }
-
-  checkForInitialMessage() async {
-    //await Firebase.initializeApp();
-    RemoteMessage? initialMessage =
-        await FirebaseMessaging.instance.getInitialMessage();
-    DateTime now = DateTime.now();
-    print('checkForInitialMessage 찍힌 시간 : $now');
-    final fcmToken = await FirebaseMessaging.instance.getToken();
-    print('fcmToken : $fcmToken');
-
-    if (initialMessage != null) {
-      PushNotification notification = PushNotification(
-        title: initialMessage.notification!.title,
-        body: initialMessage.notification!.body,
-        dataBody: initialMessage.data['title'],
-        dataTitle: initialMessage.data['body'],
-      );
-
-      setState(() {
-        _totalNotificationCounter++;
-        _notificationInfo = notification;
-      });
-    }
-  }
 
   @override
   void initState() {
     // normal background
-    registerNotification();
+    // registerNotification();
     // app state is terminated
-    checkForInitialMessage();
+    // checkForInitialMessage();
     _totalNotificationCounter = 0;
+    PushNotificationsSystem pushNotificationsSystem = PushNotificationsSystem();
+    pushNotificationsSystem.generateDeviceRecognitionToken();
+    pushNotificationsSystem.whenNotificationReceived();
     super.initState();
   }
 
